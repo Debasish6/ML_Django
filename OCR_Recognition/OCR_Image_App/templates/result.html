@@ -9,12 +9,9 @@
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <h2>Upload Image</h2>
-                <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <input type="submit" value="Upload">
-                </form>
+                <h2>OCR Result</h2>
+                <p>{{ document.text }}</p>                
+
             </div>
         </div>
     </div>
