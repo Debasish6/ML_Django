@@ -1,19 +1,26 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OCR Recognition Web App</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
     <div class="container">
         <div class="card">
+            <h1>HTML Text</h1>
             <div class="card-body">
-                <h2>OCR Result</h2>
-                <p>{{ document.text }}</p>                
+                <div class="card-result">
 
+                    <p>{{ img.text }}</p> 
+                    <img src="{{img.image.url}}">               
+    
+                </div>
             </div>
         </div>
+        
     </div>
 </body>
 </html>

@@ -7,23 +7,20 @@
     <title>OCR Recognition Web App</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
+
 <body>
     <div class="container">
         <div class="card">
+            <h1>Upload Image</h1>
             <div class="card-body">
-                <h2>Upload Image</h2>
-                <form method="post" enctype="multipart/form-data">
+                <form method="post" class="form" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <label for="id_image" class="form_label">Image:</label>&nbsp;
-                    <input type="file" name="image" id="id_image" class="form_image" required><br>
-                    <input type="submit" value="Upload">
+                    <div class="form-group">
+                        <label for="form-image" class="form_label">Image:</label>&nbsp;
+                        <input type="file" name="image" id="form-image" class="form-image" required><br>
+                    </div>
+                    <input type="submit" value="Upload" class="submit-button">
                 </form>
-                <div class="card-result">
-
-                    <h2>HTML Text</h2>
-                    <p>{{ img.text }}</p>                
-
-                </div>
 
             </div>
         </div>
