@@ -1,10 +1,6 @@
 from django.shortcuts import render
 from .forms import ImageForm
-import pytesseract
-pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
-from PIL import Image
-import cv2
-from django.core.files.base import ContentFile
+from .preprocessing import image_processing,extract_text,structured_text
 
 # Create your views here.
 def ocr_image_upload(request):
@@ -12,26 +8,32 @@ def ocr_image_upload(request):
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
             img = form.save()
-            image = cv2.imread(img.image.path)
-            
-            #Preprocessing
-            gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-            _, buffer = cv2.imencode('.jpg', gray_image)
-            processed_image = ContentFile(buffer.tobytes())
-            
+
+            processed_image = image_processing(img)
             img.processed_image.save(f'processed_{img.image.name}', processed_image)
             img.save()
             
-            #Extracting Text from Processed image
-            image = Image.open(img.processed_image.path)
-            decodec_text = pytesseract.image_to_string(image)
+            decodec_text= extract_text(img)
             img.text = decodec_text
             img.save()
-            return render(request, 'result.html', {'img': img})
+            
+            text = structured_text(decodec_text)
+            
+            #Printing the extracted text
+            print("\nExtracted text from image :")
+            for i in text.values():
+                print(i ,end="")
+                
+            context = {'img':img}
+            return render(request, 'result.html', context)
     else:
         form = ImageForm()
         
     return render(request, 'index.html', {'form': form})
+
+
+
+
 
     
 
