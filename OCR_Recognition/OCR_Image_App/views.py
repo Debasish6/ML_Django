@@ -35,6 +35,8 @@ def ocr_image_upload(request):
 
 
 
+
+
     
 
     
