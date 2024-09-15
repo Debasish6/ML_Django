@@ -8,11 +8,13 @@ def ocr_image_upload(request):
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
             img = form.save()
-
+            
+            #Doing some preprocessing
             processed_image = image_processing(img)
             img.processed_image.save(f'processed_{img.image.name}', processed_image)
             img.save()
             
+            #Storing the extracted text to decodec_text
             decodec_text= extract_text(img)
             img.text = decodec_text
             img.save()
