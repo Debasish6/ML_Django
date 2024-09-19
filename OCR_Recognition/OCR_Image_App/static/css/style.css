@@ -10,7 +10,8 @@ h1{
     margin: auto;
     margin-top: 4rem;
     border: 2px dotted blue;
-    border-radius: 8px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 10px rgb(116, 164, 255);
     text-align: center;
     padding: 5px;
     width: 700px;
