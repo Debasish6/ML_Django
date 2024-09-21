@@ -11,7 +11,7 @@ def image_processing(img):
     gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     print("Converted to grayscale image.")
     
-    thresh=cv2.threshold(gray_image,210,230,cv2.THRESH_BINARY)[1]
+    thresh=cv2.threshold(gray_image,120,230,cv2.THRESH_BINARY)[1]
     print("Threshold Applied sucessfully.")
     
     _, buffer = cv2.imencode('.jpg', thresh)
